@@ -4,10 +4,9 @@
 # SPDX-License-Identifier: Apache-2.0
 #
 
-PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/lineage_capri.mk
+PRODUCT_MAKEFILES := $(LOCAL_DIR)/aosp_capri.mk
 
 COMMON_LUNCH_CHOICES := \
-    lineage_capri-user \
-    lineage_capri-userdebug \
-    lineage_capri-eng
+    aosp_capri-user \
+    aosp_capri-userdebug \
+    aosp_capri-eng
