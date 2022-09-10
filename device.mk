@@ -1,129 +1,66 @@
+# Copyright 2014 The Android Open Source Project
 #
-# Copyright (C) 2022 The LineageOS Project
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
 #
-# SPDX-License-Identifier: Apache-2.0
+#      http://www.apache.org/licenses/LICENSE-2.0
 #
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 
-# Enable updating of APEXes
-$(call inherit-product, $(SRC_TARGET_DIR)/product/updatable_apex.mk)
+# Device path
+DEVICE_PATH := device/motorola/capri/rootdir
 
-# Include GSI keys
-$(call inherit-product, $(SRC_TARGET_DIR)/product/gsi_keys.mk)
+# Device Specific Permissions
+PRODUCT_COPY_FILES := \
+    frameworks/native/data/etc/handheld_core_hardware.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/handheld_core_hardware.xml \
+    frameworks/native/data/etc/android.hardware.telephony.gsm.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.telephony.gsm.xml
 
-# A/B
-PRODUCT_PACKAGES += \
-    android.hardware.boot@1.2-impl \
-    android.hardware.boot@1.2-impl.recovery \
-    android.hardware.boot@1.2-service
-
-PRODUCT_PACKAGES += \
-    update_engine \
-    update_engine_sideload \
-    update_verifier
-
-AB_OTA_POSTINSTALL_CONFIG += \
-    RUN_POSTINSTALL_system=true \
-    POSTINSTALL_PATH_system=system/bin/otapreopt_script \
-    FILESYSTEM_TYPE_system=ext4 \
-    POSTINSTALL_OPTIONAL_system=true
-
-AB_OTA_POSTINSTALL_CONFIG += \
-    RUN_POSTINSTALL_vendor=true \
-    POSTINSTALL_PATH_vendor=bin/checkpoint_gc \
-    FILESYSTEM_TYPE_vendor=ext4 \
-    POSTINSTALL_OPTIONAL_vendor=true
-
-PRODUCT_PACKAGES += \
-    checkpoint_gc \
-    otapreopt_script
-
-# fastbootd
-PRODUCT_PACKAGES += \
-    android.hardware.fastboot@1.1-impl-mock \
-    fastbootd
-
-# Health
-PRODUCT_PACKAGES += \
-    android.hardware.health@2.1-impl \
-    android.hardware.health@2.1-service
-
-# Overlays
-PRODUCT_ENFORCE_RRO_TARGETS := *
-
-# Partitions
-PRODUCT_BUILD_SUPER_PARTITION := false
-PRODUCT_USE_DYNAMIC_PARTITIONS := true
-
-# Product characteristics
-PRODUCT_CHARACTERISTICS := default
-
-# Rootdir
-PRODUCT_PACKAGES += \
-    apanic_annotate.sh \
-    apanic_copy.sh \
-    apanic_save.sh \
-    hardware_revisions.sh \
-    init.class_main.sh \
-    init.crda.sh \
-    init.gbmods.sh \
-    init.mdm.sh \
-    init.mmi.acdb.sh \
-    init.mmi.block_perm.sh \
-    init.mmi.boot.sh \
-    init.mmi.laser.sh \
-    init.mmi.mdlog-getlogs.sh \
-    init.mmi.modules.sh \
-    init.mmi.shutdown.sh \
-    init.mmi.touch.sh \
-    init.mmi.usb.sh \
-    init.mmi.wlan-getlogs.sh \
-    init.oem.fingerprint.sh \
-    init.oem.fingerprint2.sh \
-    init.oem.hw.sh \
-    init.qcom.class_core.sh \
-    init.qcom.coex.sh \
-    init.qcom.early_boot.sh \
-    init.qcom.efs.sync.sh \
-    init.qcom.post_boot.sh \
-    init.qcom.sdio.sh \
-    init.qcom.sensors.sh \
-    init.qcom.sh \
-    init.qcom.usb.sh \
-    init.qti.chg_policy.sh \
-    init.qti.dcvs.sh \
-    init.qti.media.sh \
-    init.qti.qcv.sh \
-    pstore_annotate.sh \
-    qca6234-service.sh \
-
-PRODUCT_PACKAGES += \
-    fstab.qcom \
-    init.mmi.charge_only.rc \
-    init.mmi.chipset.rc \
-    init.mmi.debug.rc \
-    init.mmi.diag.rc \
-    init.mmi.diag_mdlog.rc \
-    init.mmi.overlay.rc \
-    init.mmi.rc \
-    init.mmi.tcmd.rc \
-    init.mmi.usb.rc \
-    init.mmi.wlan.rc \
-    init.qcom.factory.rc \
-    init.qcom.rc \
-    init.qcom.usb.rc \
-    init.qti.ufs.rc \
-    init.target.rc \
-    init.recovery.qcom.rc \
-
+# Kernel
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/rootdir/etc/fstab.qcom:$(TARGET_COPY_OUT_RAMDISK)/fstab.qcom
+    device/motorola/sm4250-common-kernel/bengal-moto-capri-Image.gz:kernel
 
-# Shipping API level
-PRODUCT_SHIPPING_API_LEVEL := 30
+# TODO: validate these files present in vendor
+# Audio Configuration
+PRODUCT_COPY_FILES += \
+    $(DEVICE_PATH)/vendor/etc/mixer_paths.xml:$(TARGET_COPY_OUT_VENDOR)/etc/mixer_paths.xml \
+    $(DEVICE_PATH)/vendor/etc/audio_policy_volumes.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_volumes.xml \
+    $(DEVICE_PATH)/vendor/etc/default_volume_tables.xml:$(TARGET_COPY_OUT_VENDOR)/etc/default_volume_tables.xml
 
-# Soong namespaces
-PRODUCT_SOONG_NAMESPACES += \
-    $(LOCAL_PATH)
+# Device Init
+PRODUCT_PACKAGES += \
+    fstab.capri \
+    ramdisk-fstab.capri \
+    init.recovery.qcom.rc
 
-# Inherit the proprietary files
-$(call inherit-product, vendor/motorola/capri/capri-vendor.mk)
+# These should be output of the ROM build, we can ignore for TWRP
+# Telephony Packages (AOSP)
+PRODUCT_PACKAGES += \
+    InCallUI \
+    Stk
+
+# Overlays, these should be output as well which we can ignore for TWRP I believe
+# if not, we can comment these
+PRODUCT_PACKAGES += \
+   capriFrameworkOverlay \
+   capriMotoActionsOverlay \
+   capriSystemUIOverlay
+
+# TODO LATER: Should be similar, may be come back in case stuff isnt' working out
+PRODUCT_AAPT_CONFIG := normal
+PRODUCT_AAPT_PREBUILT_DPI := xxhdpi xhdpi hdpi
+PRODUCT_AAPT_PREF_CONFIG := xhdpi
+
+PRODUCT_PROPERTY_OVERRIDES := \
+    ro.sf.lcd_density=280
+
+# Inherit from those products. Most specific first.
+$(call inherit-product, device/motorola/sm4250-common/platform.mk)
+
+# TODO: include vendor
+# include board vendor blobs
+$(call inherit-product-if-exists, vendor/motorola/capri/capri-vendor.mk)
