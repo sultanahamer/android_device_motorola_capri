@@ -4,6 +4,8 @@
 # SPDX-License-Identifier: Apache-2.0
 #
 
+include device/motorola/sm4250-common/PlatformConfig.mk
+
 DEVICE_PATH := device/motorola/capri
 
 # A/B
@@ -56,13 +58,19 @@ BOARD_PREBUILT_DTBOIMAGE := $(DEVICE_PATH)/prebuilts/dtbo.img
 BOARD_KERNEL_SEPARATED_DTBO := 
 endif
 
+# Kernel Modules
+BOARD_VENDOR_KERNEL_MODULES := \
+    $(wildcard device/motorola/sm4250-common-kernel/modules/*.ko)
+
+# TODO: recheck this
 # Partitions
 BOARD_BOOTIMAGE_PARTITION_SIZE := 100663296
 BOARD_DTBOIMG_PARTITION_SIZE := 25165824
-BOARD_SUPER_PARTITION_SIZE := 9126805504 # TODO: Fix hardcoded value
+BOARD_SUPER_PARTITION_SIZE := 10267656192
 BOARD_SUPER_PARTITION_GROUPS := motorola_dynamic_partitions
 BOARD_MOTOROLA_DYNAMIC_PARTITIONS_PARTITION_LIST := system system_ext vendor product
-BOARD_MOTOROLA_DYNAMIC_PARTITIONS_SIZE := 9122611200 # TODO: Fix hardcoded value
+# DYNAMIC_PARTITIONS_SIZE = (SUPER_PARTITION_SIZE / 2) - 4MB
+BOARD_MOTOROLA_DYNAMIC_PARTITIONS_SIZE := 5129633792
 
 # Platform
 TARGET_BOARD_PLATFORM := bengal
@@ -83,12 +91,13 @@ TARGET_USERIMAGES_USE_F2FS := true
 # Security patch level
 VENDOR_SECURITY_PATCH := 2021-08-01
 
+# TODO Later: we can enable and check later
 # Verified Boot
-BOARD_AVB_ENABLE := true
-BOARD_AVB_MAKE_VBMETA_IMAGE_ARGS += --flags 3
+# BOARD_AVB_ENABLE := true
+# BOARD_AVB_MAKE_VBMETA_IMAGE_ARGS += --flags 3
 
 # VINTF
 DEVICE_MANIFEST_FILE += $(DEVICE_PATH)/manifest.xml
 
-# Inherit the proprietary files
+# Inherit the proprietary files, nothing in this file as of now
 include vendor/motorola/capri/BoardConfigVendor.mk

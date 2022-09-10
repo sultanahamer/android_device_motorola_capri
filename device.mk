@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Device path
-DEVICE_PATH := device/motorola/capri/rootdir
+# Vendor path
+VENDOR_PATH := vendor/motorola/capri/proprietary
 
 # Device Specific Permissions
 PRODUCT_COPY_FILES := \
@@ -24,12 +24,11 @@ PRODUCT_COPY_FILES := \
 PRODUCT_COPY_FILES += \
     device/motorola/sm4250-common-kernel/bengal-moto-capri-Image.gz:kernel
 
-# TODO LATER: this should be output from vendor, why is this being expected here
 # Audio Configuration
 PRODUCT_COPY_FILES += \
-    $(DEVICE_PATH)/vendor/etc/mixer_paths.xml:$(TARGET_COPY_OUT_VENDOR)/etc/mixer_paths.xml \
-    $(DEVICE_PATH)/vendor/etc/audio_policy_volumes.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_volumes.xml \
-    $(DEVICE_PATH)/vendor/etc/default_volume_tables.xml:$(TARGET_COPY_OUT_VENDOR)/etc/default_volume_tables.xml
+    $(VENDOR_PATH)/vendor/etc/mixer_paths.xml:$(TARGET_COPY_OUT_VENDOR)/etc/mixer_paths.xml \
+    $(VENDOR_PATH)/vendor/etc/audio_policy_volumes.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_volumes.xml \
+    $(VENDOR_PATH)/vendor/etc/default_volume_tables.xml:$(TARGET_COPY_OUT_VENDOR)/etc/default_volume_tables.xml
 
 # Device Init
 PRODUCT_PACKAGES += \
