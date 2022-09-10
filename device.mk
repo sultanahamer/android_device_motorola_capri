@@ -24,7 +24,7 @@ PRODUCT_COPY_FILES := \
 PRODUCT_COPY_FILES += \
     device/motorola/sm4250-common-kernel/bengal-moto-capri-Image.gz:kernel
 
-# TODO: validate these files present in vendor
+# TODO LATER: this should be output from vendor, why is this being expected here
 # Audio Configuration
 PRODUCT_COPY_FILES += \
     $(DEVICE_PATH)/vendor/etc/mixer_paths.xml:$(TARGET_COPY_OUT_VENDOR)/etc/mixer_paths.xml \
@@ -61,6 +61,7 @@ PRODUCT_PROPERTY_OVERRIDES := \
 # Inherit from those products. Most specific first.
 $(call inherit-product, device/motorola/sm4250-common/platform.mk)
 
-# TODO: include vendor
+# TODO LATER: first check of vendor files done. Looks alright build might call out
+# some failures..
 # include board vendor blobs
 $(call inherit-product-if-exists, vendor/motorola/capri/capri-vendor.mk)
