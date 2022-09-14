@@ -7,3 +7,5 @@
 # SPDX-License-Identifier: Apache-2.0
 #
 ```
+# Don't use the proprietary-files from this repo. It is not in sync with vendor repo
+Instead directly use the vendor repo
