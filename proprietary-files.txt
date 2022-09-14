@@ -70,7 +70,7 @@ vendor/lib64/vendor.qti.hardware.alarm@1.0.so
 # Atrace
 vendor/bin/hw/android.hardware.atrace@1.0-service
 vendor/etc/init/android.hardware.atrace@1.0-service.rc
-vendor/etc/vintf/manifest/android.hardware.atrace@1.0-service.xml
+#vendor/etc/vintf/manifest/android.hardware.atrace@1.0-service.xml
 
 # Audio
 vendor/bin/hw/android.hardware.audio.service
@@ -1943,7 +1943,7 @@ vendor/bin/hw/chipone_ident
 vendor/bin/hw/com.motorola.hardware.display.panel@1.0-service
 vendor/bin/hw/fpc_ident
 vendor/bin/hw/motorola.hardware.camera.imgtuner@1.0-service
-vendor/bin/hw/motorola.hardware.fdrcontrol@1.1-service
+vendor/bin/hw/motorola.hardware.fdrcontrol@1.2-service
 vendor/bin/hw/motorola.hardware.fmradio@1.0-service
 vendor/bin/hw/motorola.hardware.health@2.0-service
 vendor/bin/hw/motorola.hardware.input@1.0-service
@@ -2105,7 +2105,7 @@ vendor/etc/init/init.qti.media.rc
 vendor/etc/init/init.qti.qcv.rc
 vendor/etc/init/init.vendor.sensors.rc
 vendor/etc/init/motorola.hardware.camera.imgtuner@1.0-service.rc
-vendor/etc/init/motorola.hardware.fdrcontrol@1.1-service.rc
+vendor/etc/init/motorola.hardware.fdrcontrol@1.2-service.rc
 vendor/etc/init/motorola.hardware.health@2.0-service.rc
 vendor/etc/init/motorola.hardware.input@1.0-service.rc
 vendor/etc/init/motorola.hardware.vibrator@1.0-service.rc
