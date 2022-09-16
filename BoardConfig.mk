@@ -95,7 +95,8 @@ DEVICE_MANIFEST_FILE += $(DEVICE_PATH)/manifest.xml
 
 DEVICE_MATRIX_FILE := $(DEVICE_PATH)/compatibility_matrix.xml
 
-DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE := $(DEVICE_PATH)/device_framework_matrix.xml
+DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE := $(DEVICE_PATH)/device_framework_matrix.xml \
+                                              $(DEVICE_PATH)/device_framework_matrix_system.xml
 
 # Users setup
 
