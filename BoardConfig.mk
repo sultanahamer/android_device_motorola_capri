@@ -97,5 +97,9 @@ DEVICE_MATRIX_FILE := $(DEVICE_PATH)/compatibility_matrix.xml
 
 DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE := $(DEVICE_PATH)/device_framework_matrix.xml
 
+# Users setup
+
+TARGET_FS_CONFIG_GEN += $(DEVICE_PATH)/config.fs
+
 # Inherit the proprietary files
 include vendor/motorola/capri/BoardConfigVendor.mk
