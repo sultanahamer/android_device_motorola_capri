@@ -17,7 +17,7 @@ if [ -f $getlogs_opts ]; then
    mv -f $getlogs_opts $arg_output/
 else
    # default value
-   args="-b 209715200"
+   args="-b 419430400"
 fi
 
 diag_mdlog-getlogs -o $arg_output $args &> $log_file

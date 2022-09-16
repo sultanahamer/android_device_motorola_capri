@@ -1,4 +1,4 @@
-# Unpinned blobs from capri_retail-user 11 RRB31.Q1-3-48 5b092 release-keys
+# Unpinned blobs from capri_retail-user 11 RRB31.Q1-3-58 2b9e1 release-keys
 
 # ACDB
 vendor/etc/acdbdata/common/Bluetooth_cal.acdb
@@ -1473,6 +1473,7 @@ vendor/radio/qcril_database/upgrade/19_version_qcrildb.sql
 vendor/radio/qcril_database/upgrade/20_version_qcrildb.sql
 vendor/radio/qcril_database/upgrade/21_version_qcrildb.sql
 vendor/radio/qcril_database/upgrade/22_version_qcrildb.sql
+vendor/radio/qcril_database/upgrade/24_version_qcrildb.sql
 vendor/radio/qcril_database/upgrade/3_version_qcrildb.sql
 vendor/radio/qcril_database/upgrade/4_version_qcrildb.sql
 vendor/radio/qcril_database/upgrade/5_version_qcrildb.sql
@@ -2577,6 +2578,7 @@ vendor/lib64/libwqe.so
 vendor/lib64/motorola.hardware.camera.imgtuner@1.0.so
 vendor/lib64/motorola.hardware.fdrcontrol@1.0.so
 vendor/lib64/motorola.hardware.fdrcontrol@1.1.so
+vendor/lib64/motorola.hardware.fdrcontrol@1.2.so
 vendor/lib64/motorola.hardware.fmradio@1.0.so
 vendor/lib64/motorola.hardware.health@2.0.so
 vendor/lib64/motorola.hardware.input@1.0.so

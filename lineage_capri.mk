@@ -23,6 +23,6 @@ PRODUCT_MANUFACTURER := motorola
 PRODUCT_GMS_CLIENTID_BASE := android-motorola
 
 PRODUCT_BUILD_PROP_OVERRIDES += \
-    PRIVATE_BUILD_DESC="capri_retail-user 11 RRB31.Q1-3-48 5b092 release-keys"
+    PRIVATE_BUILD_DESC="capri_retail-user 11 RRB31.Q1-3-58 2b9e1 release-keys"
 
-BUILD_FINGERPRINT := motorola/capri_retail/capri:11/RRB31.Q1-3-48/5b092:user/release-keys
+BUILD_FINGERPRINT := motorola/capri_retail/capri:11/RRB31.Q1-3-58/2b9e1:user/release-keys
