@@ -4,16 +4,10 @@
 # SPDX-License-Identifier: Apache-2.0
 #
 
+BOARD_VENDOR := motorola
+
 DEVICE_PATH := device/motorola/capri
 
-# A/B
-AB_OTA_UPDATER := true
-AB_OTA_PARTITIONS += \
-    system \
-    system_ext \
-    vendor \
-    product
-BOARD_USES_RECOVERY_AS_BOOT := true
 
 # Architecture
 TARGET_ARCH := arm64
@@ -30,17 +24,16 @@ TARGET_2ND_CPU_ABI2 := armeabi
 TARGET_2ND_CPU_VARIANT := generic
 TARGET_2ND_CPU_VARIANT_RUNTIME := cortex-a9
 
-# APEX
+# TODO: enable this later
+# TARGET_USES_64_BIT_BINDER := true
+
+# APEX, TODO: not present in nio
 DEXPREOPT_GENERATE_APEX_IMAGE := true
 
 # Bootloader
 TARGET_BOOTLOADER_BOARD_NAME := capri
 TARGET_NO_BOOTLOADER := true
 
-# Display
-TARGET_SCREEN_DENSITY := 280
-TARGET_SCREEN_WIDTH := 720
-TARGET_SCREEN_HEIGHT := 1600
 
 # Kernel
 BOARD_BOOTIMG_HEADER_VERSION := 3
@@ -62,17 +55,57 @@ BOARD_PREBUILT_DTBOIMAGE := $(DEVICE_PATH)/prebuilts/dtbo.img
 endif
 
 # Partitions
-BOARD_FLASH_BLOCK_SIZE := 262144 # (BOARD_KERNEL_PAGESIZE * 64)
+
+# TODO: not sure if we have to enable this
+# BOARD_USES_METADATA_PARTITION := true
+
+# TODO: this came auto generated I guess and below from electimons caprip  BOARD_FLASH_BLOCK_SIZE := 262144 # (BOARD_KERNEL_PAGESIZE * 64)
+BOARD_FLASH_BLOCK_SIZE := 131072 # (BOARD_KERNEL_PAGESIZE * 64)
+# TODO: this is in my stuff and above in caprip BOARD_FLASH_BLOCK_SIZE := 262144 # (BOARD_KERNEL_PAGESIZE * 64)
 BOARD_BOOTIMAGE_PARTITION_SIZE := 100663296
 BOARD_DTBOIMG_PARTITION_SIZE := 25165824
 BOARD_VENDOR_BOOTIMAGE_PARTITION_SIZE := 100663296
-BOARD_SUPER_PARTITION_SIZE := 10267656192
-BOARD_SUPER_PARTITION_GROUPS := motorola_dynamic_partitions
-BOARD_MOTOROLA_DYNAMIC_PARTITIONS_PARTITION_LIST := system system_ext vendor product
+
+# TODO: from electimon
+BOARD_SUPER_PARTITION_SIZE := 10804527104
+
+# TODO: from auto generate
+# BOARD_SUPER_PARTITION_SIZE := 10267656192
+BOARD_SUPER_PARTITION_GROUPS := mot_dynamic_partitions
+
+# Set error limit to SUPER_PARTITION_SIZE - 500MiB
+BOARD_SUPER_PARTITION_ERROR_LIMIT := 10300162048
+
 # DYNAMIC_PARTITIONS_SIZE = (SUPER_PARTITION_SIZE / 2) - 4MB
-BOARD_MOTOROLA_DYNAMIC_PARTITIONS_SIZE := 5129633792
+BOARD_MOT_DYNAMIC_PARTITIONS_SIZE := 6169821184
+BOARD_MOT_DYNAMIC_PARTITIONS_PARTITION_LIST := \
+    system \
+    system_ext \
+    product \
+    vendor
+
+# Slightly overprovision dynamic partitions with 50MiB to
+# allow on-device file editing
+BOARD_SYSTEM_EXTIMAGE_PARTITION_RESERVED_SIZE := 52428800
+BOARD_SYSTEMIMAGE_PARTITION_RESERVED_SIZE := 52428800
+BOARD_VENDORIMAGE_PARTITION_RESERVED_SIZE := 52428800
+BOARD_PRODUCTIMAGE_PARTITION_RESERVED_SIZE := 52428800
+
+# Reserve space for data encryption (239541551104-16384)
+BOARD_USERDATAIMAGE_PARTITION_SIZE := 14919106048
+
+# Build system_ext image
+TARGET_COPY_OUT_SYSTEM_EXT := system_ext
+BOARD_SYSTEM_EXTIMAGE_FILE_SYSTEM_TYPE := ext4
+BOARD_SYSTEM_EXTIMAGE_JOURNAL_SIZE := 0
+BOARD_SYSTEM_EXTIMAGE_EXTFS_INODE_COUNT := 4096
+
+# This target has no recovery partition
+BOARD_USES_RECOVERY_AS_BOOT := true
+TARGET_NO_RECOVERY := true
 
 # Platform
+BOARD_USES_QCOM_HARDWARE := true
 TARGET_BOARD_PLATFORM := bengal
 
 # Properties
@@ -102,6 +135,14 @@ DEVICE_MATRIX_FILE := $(DEVICE_PATH)/compatibility_matrix.xml
 
 DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE := $(DEVICE_PATH)/device_framework_matrix.xml \
                                               $(DEVICE_PATH)/device_framework_matrix_system.xml
+
+
+# Power
+TARGET_USES_INTERACTION_BOOST := true
+TARGET_TAP_TO_WAKE_NODE := "/sys/class/touchscreen/NVT-ts/double_click"
+
+# RIL TODO: enable this for RIL to test out
+# ENABLE_VENDOR_RIL_SERVICE := true
 
 # Users setup
 

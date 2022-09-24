@@ -10,7 +10,73 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/updatable_apex.mk)
 # Include GSI keys
 $(call inherit-product, $(SRC_TARGET_DIR)/product/gsi_keys.mk)
 
+# Inherit the proprietary files, non open-source specific
+$(call inherit-product, vendor/motorola/capri/capri-vendor.mk)
+
+# TODO: Enable these things later
+# # Additional native libraries
+# PRODUCT_COPY_FILES += \
+#     $(LOCAL_PATH)/configs/public.libraries.txt:$(TARGET_COPY_OUT_VENDOR)/etc/public.libraries.txt \
+#     $(LOCAL_PATH)/configs/public.libraries.system_ext-qti.txt:$(TARGET_COPY_OUT_SYSTEM_EXT)/etc/public.libraries-qti.txt
+# 
+# # Overlays
+# DEVICE_PACKAGE_OVERLAYS += \
+#     $(LOCAL_PATH)/overlay-lineage
+# 
+# PRODUCT_ENFORCE_RRO_TARGETS := *
+# 
+# PRODUCT_PACKAGES += \
+#     FrameworksResCommon \
+#     CarrierConfigResCommon \
+#     CellBroadcastReceiverResCommon \
+#     SystemUIResCommon \
+#     TelecommResCommon \
+#     TelephonyResCommon \
+#     WifiResCommon \
+#     FrameworksResTarget \
+#     WifiResTarget
+# 
+# PRODUCT_PACKAGES += \
+#     FrameworksResNio \
+#     SystemUIResNio
+
 # A/B
+AB_OTA_UPDATER := true
+AB_OTA_PARTITIONS += \
+	boot \
+    vendor_boot \
+    dtbo \
+    product \
+    system \
+    system_ext \
+    vendor \
+    vbmeta \
+    vbmeta_system
+
+AB_OTA_POSTINSTALL_CONFIG += \
+    RUN_POSTINSTALL_system=true \
+    POSTINSTALL_PATH_system=system/bin/otapreopt_script \
+    FILESYSTEM_TYPE_system=ext4 \
+    POSTINSTALL_OPTIONAL_system=true
+
+# TODO: Not present in nio, might have to remove later, lets see
+AB_OTA_POSTINSTALL_CONFIG += \
+    RUN_POSTINSTALL_vendor=true \
+    POSTINSTALL_PATH_vendor=bin/checkpoint_gc \
+    FILESYSTEM_TYPE_vendor=ext4 \
+    POSTINSTALL_OPTIONAL_vendor=true
+
+PRODUCT_PACKAGES += \
+    checkpoint_gc \
+    otapreopt_script
+
+# Partitions
+PRODUCT_BUILD_SUPER_PARTITION := false
+PRODUCT_USE_DYNAMIC_PARTITIONS := true
+
+
+# TODO: lot more here needs changes, we can correct these once we are able to
+# generate images
 PRODUCT_PACKAGES += \
     android.hardware.boot@1.2-impl \
     android.hardware.boot@1.2-impl.recovery \
@@ -21,21 +87,6 @@ PRODUCT_PACKAGES += \
     update_engine_sideload \
     update_verifier
 
-AB_OTA_POSTINSTALL_CONFIG += \
-    RUN_POSTINSTALL_system=true \
-    POSTINSTALL_PATH_system=system/bin/otapreopt_script \
-    FILESYSTEM_TYPE_system=ext4 \
-    POSTINSTALL_OPTIONAL_system=true
-
-AB_OTA_POSTINSTALL_CONFIG += \
-    RUN_POSTINSTALL_vendor=true \
-    POSTINSTALL_PATH_vendor=bin/checkpoint_gc \
-    FILESYSTEM_TYPE_vendor=ext4 \
-    POSTINSTALL_OPTIONAL_vendor=true
-
-PRODUCT_PACKAGES += \
-    checkpoint_gc \
-    otapreopt_script
 
 # fastbootd
 PRODUCT_PACKAGES += \
@@ -50,9 +101,6 @@ PRODUCT_PACKAGES += \
 # Overlays
 PRODUCT_ENFORCE_RRO_TARGETS := *
 
-# Partitions
-PRODUCT_BUILD_SUPER_PARTITION := false
-PRODUCT_USE_DYNAMIC_PARTITIONS := true
 
 # Product characteristics
 PRODUCT_CHARACTERISTICS := default
@@ -118,12 +166,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/rootdir/etc/fstab.qcom:$(TARGET_COPY_OUT_RAMDISK)/fstab.qcom
 
-# Shipping API level
-PRODUCT_SHIPPING_API_LEVEL := 30
-
 # Soong namespaces
 PRODUCT_SOONG_NAMESPACES += \
     $(LOCAL_PATH)
 
-# Inherit the proprietary files
-$(call inherit-product, vendor/motorola/capri/capri-vendor.mk)
