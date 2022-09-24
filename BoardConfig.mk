@@ -105,7 +105,8 @@ BOARD_USES_RECOVERY_AS_BOOT := true
 TARGET_NO_RECOVERY := true
 
 # Platform
-BOARD_USES_QCOM_HARDWARE := true
+# TODO: uncomment this after first build. Right now it conflicts with our copy files
+# BOARD_USES_QCOM_HARDWARE := true
 TARGET_BOARD_PLATFORM := bengal
 
 # Properties
