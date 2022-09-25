@@ -60,15 +60,15 @@ AB_OTA_POSTINSTALL_CONFIG += \
     POSTINSTALL_OPTIONAL_system=true
 
 # TODO: Not present in nio, might have to remove later, lets see
-AB_OTA_POSTINSTALL_CONFIG += \
-    RUN_POSTINSTALL_vendor=true \
-    POSTINSTALL_PATH_vendor=bin/checkpoint_gc \
-    FILESYSTEM_TYPE_vendor=ext4 \
-    POSTINSTALL_OPTIONAL_vendor=true
+# AB_OTA_POSTINSTALL_CONFIG += \
+#     RUN_POSTINSTALL_vendor=true \
+#     POSTINSTALL_PATH_vendor=bin/checkpoint_gc \
+#     FILESYSTEM_TYPE_vendor=ext4 \
+#     POSTINSTALL_OPTIONAL_vendor=true
 
 PRODUCT_PACKAGES += \
-    checkpoint_gc \
     otapreopt_script
+    # checkpoint_gc
 
 # Partitions
 PRODUCT_BUILD_SUPER_PARTITION := false
@@ -164,7 +164,9 @@ PRODUCT_PACKAGES += \
     init.recovery.qcom.rc \
 
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/rootdir/etc/fstab.qcom:$(TARGET_COPY_OUT_RAMDISK)/fstab.qcom
+    $(LOCAL_PATH)/rootdir/etc/fstab.qcom:$(TARGET_COPY_OUT_RAMDISK)/fstab.qcom \
+	$(LOCAL_PATH)/rootdir/etc/fstab.qcom:$(TARGET_COPY_OUT_VENDOR_RAMDISK)/first_stage_ramdisk/fstab.qcom
+
 
 # Soong namespaces
 PRODUCT_SOONG_NAMESPACES += \
