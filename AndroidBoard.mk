@@ -18,7 +18,7 @@ INSTALLED_KERNEL_TARGET := $(PRODUCT_OUT)/kernel
 recovery_uncompressed_ramdisk := $(PRODUCT_OUT)/ramdisk-recovery.cpio
 
 
-# TODO Stopper: Should make sure all of these are available from kernel builds
+# TODO Later: Should make sure all of these are available from kernel builds
 RECOVERY_KMOD_TARGETS := \
     qpnp-power-on-mmi.ko \
     qpnp_adaptive_charge.ko \

@@ -66,7 +66,7 @@ BOARD_PREBUILT_DTBOIMAGE := $(DEVICE_PATH)/prebuilts/dtbo.img
 BOARD_INCLUDE_DTB_IN_BOOTIMG := true
 endif
 
-# TODO Stopper: Add this to proprietary files
+# TODO Later: Enable this later
 # Kernel modules - Audio
 # TARGET_MODULE_ALIASES += \
 #     adsp_loader_dlkm.ko:audio_adsp_loader.ko \
@@ -98,6 +98,7 @@ endif
 #     wsa_macro_dlkm.ko:audio_wsa_macro.ko
 
 # Kernel modules - WLAN
+# Below alias is different for our board
 # TARGET_MODULE_ALIASES += \
 #     wlan.ko:qca_cld3_qca6390.ko
 

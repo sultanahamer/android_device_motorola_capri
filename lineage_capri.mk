@@ -18,7 +18,7 @@
 $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 
-# Inherit from nio device
+# Inherit from capri device
 $(call inherit-product, device/motorola/capri/device.mk)
 
 # Inherit some common Lineage stuff.
@@ -55,3 +55,4 @@ PRODUCT_GMS_CLIENTID_BASE := android-motorola
 # TODO Stopper: copy system.prop and update accordingly
 # TODO Stopper: root directory might have extra stuff related to vintf or
 # something not around, might have to remove them
+# TODO Stopper: work on proprietary-files-rec as well

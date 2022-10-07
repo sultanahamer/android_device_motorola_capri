@@ -299,9 +299,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.hardware.vulkan=adreno \
     ro.hardware.egl=adreno
 
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.gfx.driver.1=com.qualcomm.qti.gpudrivers.kona.api30 \
-    vendor.opengles.version=196610
+# PRODUCT_PROPERTY_OVERRIDES += \
+#     ro.gfx.driver.1=com.qualcomm.qti.gpudrivers.kona.api30 \
+#     vendor.opengles.version=196610
 
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.demo.hdmirotationlock=false \

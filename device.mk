@@ -150,9 +150,7 @@ PRODUCT_PACKAGES += \
     audio.usb.default \
     libaudio-resampler \
     tinymix \
-    # Below seems comman in kona platform so trying bengal
-    # sound_trigger.primary.kona
-    sound_trigger.primary.bengal
+    sound_trigger.primary.bengal # sound_trigger.primary.kona
 
 # TODO Later: Electimon is guessing these would come from lineageos
 # These are not all present in stock rom
