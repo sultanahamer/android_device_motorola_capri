@@ -52,7 +52,7 @@ PRODUCT_GMS_CLIENTID_BASE := android-motorola
 # copied bootcrl from moto-common
 # bootcrl has recovery directory which isn't present in moto-common
 # copied bluetooth from moto-common and added missing flags from nio
-# TODO Stopper: copy system.prop and update accordingly
-# TODO Stopper: root directory might have extra stuff related to vintf or
-# something not around, might have to remove them
-# TODO Stopper: work on proprietary-files-rec as well
+# System.prop seems to be almost same exact prop file from the stock rom, with
+# lesser stuff from stock that are specific
+# TODO Stopper: work on recovery initial directory, that should take care of 
+# proprietary-files-rec
