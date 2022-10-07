@@ -62,7 +62,6 @@ vendor/lib/libacdbloader.so
 vendor/lib/libacdbrtac.so
 vendor/lib/libadiertac.so
 vendor/lib/libadm.so
-vendor/lib/libAndroidAlgSys.so
 vendor/lib/libaudcal.so
 vendor/lib/libqtigef.so
 vendor/lib/soundfx/libmmieffectswrapper.so
@@ -1310,8 +1309,9 @@ vendor/etc/wifi/aoa_cldb_falcon.bin
 vendor/etc/wifi/aoa_cldb_swl14.bin
 
 # WiFi Display - from lmi-user 11 RKQ1.200826.002
+# could not find the below app. extract it from caprip later
 -framework/WfdCommon.jar
--system_ext/priv-app/WfdService/WfdService.apk
+#-system_ext/priv-app/WfdService/WfdService.apk
 
 # WiFi Display
 vendor/lib/libFileMux_proprietary.so
