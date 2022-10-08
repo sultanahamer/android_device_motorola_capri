@@ -54,5 +54,5 @@ PRODUCT_GMS_CLIENTID_BASE := android-motorola
 # copied bluetooth from moto-common and added missing flags from nio
 # System.prop seems to be almost same exact prop file from the stock rom, with
 # lesser stuff from stock that are specific
-# TODO Stopper: work on recovery initial directory, that should take care of 
-# proprietary-files-rec
+# TODO: removed these from vendor
+# WCNSS_qcom_cfg and wlan_mac.bin they are symlinks
