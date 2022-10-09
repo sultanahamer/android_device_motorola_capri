@@ -19,21 +19,19 @@ recovery_uncompressed_ramdisk := $(PRODUCT_OUT)/ramdisk-recovery.cpio
 
 
 # TODO Later: Should make sure all of these are available from kernel builds
-RECOVERY_KMOD_TARGETS := \
-    qpnp-power-on-mmi.ko \
-    qpnp_adaptive_charge.ko \
-    nova_0flash_mmi.ko \
-    sensors_class.ko \
-    chipone_tddi_mmi.ko \
-    himax_v3_mmi_hx83102d.ko \
-    himax_v3_mmi.ko \
-    ili9882_mmi.ko
-    # aw8695.ko \
-
-INSTALLED_RECOVERY_KMOD_TARGETS := $(RECOVERY_KMOD_TARGETS:%=$(TARGET_RECOVERY_ROOT_OUT)/lib/modules/%)
-$(INSTALLED_RECOVERY_KMOD_TARGETS): $(INSTALLED_KERNEL_TARGET)
-	echo -e ${CL_GRN}"Copying kernel modules to recovery"${CL_RST}
-	@mkdir -p $(dir $@)
-	cp $(@F:%=$(TARGET_OUT_VENDOR)/lib/modules/%) $(TARGET_RECOVERY_ROOT_OUT)/lib/modules/
-
-$(recovery_uncompressed_ramdisk): $(INSTALLED_RECOVERY_KMOD_TARGETS)
+# Removing these as these are compiled into kernel
+# RECOVERY_KMOD_TARGETS := \
+#     qpnp-power-on-mmi.ko \
+#     qpnp_adaptive_charge.ko \
+#     nova_0flash_mmi.ko \
+#     sensors_class.ko \
+#     ili9882_mmi.ko
+#     # aw8695.ko \
+#
+# INSTALLED_RECOVERY_KMOD_TARGETS := $(RECOVERY_KMOD_TARGETS:%=$(TARGET_RECOVERY_ROOT_OUT)/lib/modules/%)
+# $(INSTALLED_RECOVERY_KMOD_TARGETS): $(INSTALLED_KERNEL_TARGET)
+# 	echo -e ${CL_GRN}"Copying kernel modules to recovery"${CL_RST}
+# 	@mkdir -p $(dir $@)
+# 	cp $(@F:%=$(TARGET_OUT_VENDOR)/lib/modules/%) $(TARGET_RECOVERY_ROOT_OUT)/lib/modules/
+#
+# $(recovery_uncompressed_ramdisk): $(INSTALLED_RECOVERY_KMOD_TARGETS)

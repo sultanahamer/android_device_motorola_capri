@@ -43,30 +43,36 @@ TARGET_NO_BOOTLOADER := true
 BOARD_KERNEL_BASE := 0x00000000
 BOARD_KERNEL_CMDLINE := console=ttyMSM0,115200n8 earlycon=msm_geni_serial,0x4a90000 androidboot.hardware=qcom androidboot.console=ttyMSM0 androidboot.memcg=1 lpm_levels.sleep_disabled=1 video=vfb:640x400,bpp=32,memsize=3072000 msm_rtb.filter=0x237 service_locator.enable=1 swiotlb=2048 loop.max_part=7 androidboot.hab.csv=7 androidboot.hab.product=capri androidboot.hab.cid=50 buildvariant=eng ro.secure=0 ro.debuggable=1
 BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive
+BOARD_KERNEL_CMDLINE += androidboot.usbcontroller=4e00000.dwc3
+BOARD_RAMDISK_OFFSET     := 0x01000000
+BOARD_DTB_OFFSET         := 0x01f00000
+BOARD_MKBOOTIMG_ARGS += --dtb_offset $(BOARD_DTB_OFFSET)
 BOARD_KERNEL_IMAGE_NAME := Image.gz
 BOARD_KERNEL_PAGESIZE := 4096
 BOARD_KERNEL_SEPARATED_DTBO := true
-TARGET_KERNEL_ADDITIONAL_FLAGS := \
-    DTC_EXT=$(shell pwd)/prebuilts/misc/linux-x86/dtc/dtc \
-    LLVM=1
+# TARGET_KERNEL_ADDITIONAL_FLAGS := \
+#     DTC_EXT=$(shell pwd)/prebuilts/misc/linux-x86/dtc/dtc \
+#     LLVM=1
 TARGET_KERNEL_ARCH := arm64
+# TARGET_KERNEL_CONFIG := vendor/bengal-perf_defconfig
 TARGET_KERNEL_CONFIG := vendor/bengal-moto-guamc_defconfig
 TARGET_KERNEL_SOURCE := kernel/motorola/capri
 TARGET_KERNEL_VERSION := 4.19
 TARGET_KERNEL_CLANG_COMPILE := true
-#KERNEL_TOOLCHAIN := $(PWD)/prebuilts/gcc/linux-x86/aarch64/arm64-gcc/bin
-#TARGET_KERNEL_CROSS_COMPILE_PREFIX := aarch64-elf-
+# KERNEL_TOOLCHAIN := $(PWD)/prebuilts/gcc/linux-x86/aarch64/arm64-gcc/bin
+# TARGET_KERNEL_CROSS_COMPILE_PREFIX := aarch64-elf-
 
-# Kernel - prebuilt
-TARGET_FORCE_PREBUILT_KERNEL := true
-ifeq ($(TARGET_FORCE_PREBUILT_KERNEL),true)
-TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)/prebuilts/kernel
-BOARD_PREBUILT_DTBIMAGE_DIR := $(DEVICE_PATH)/prebuilts
-BOARD_PREBUILT_DTBOIMAGE := $(DEVICE_PATH)/prebuilts/dtbo.img
-BOARD_INCLUDE_DTB_IN_BOOTIMG := true
-endif
+# # Kernel - prebuilt
+# TARGET_FORCE_PREBUILT_KERNEL := true
+# ifeq ($(TARGET_FORCE_PREBUILT_KERNEL),true)
+# TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)/prebuilts/kernel
+# BOARD_PREBUILT_DTBIMAGE_DIR := $(DEVICE_PATH)/prebuilts
+# BOARD_PREBUILT_DTBOIMAGE := $(DEVICE_PATH)/prebuilts/dtbo.img
+# BOARD_INCLUDE_DTB_IN_BOOTIMG := true
+# endif
 
 # TODO Later: Enable this later
+# TODO check: if these are created during build
 # Kernel modules - Audio
 # TARGET_MODULE_ALIASES += \
 #     adsp_loader_dlkm.ko:audio_adsp_loader.ko \
@@ -183,22 +189,12 @@ BOARD_PRODUCTIMAGE_FILE_SYSTEM_TYPE := ext4
 BOARD_SYSTEMIMAGE_FILE_SYSTEM_TYPE := ext4
 BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE := ext4
 BOARD_SYSTEM_EXTIMAGE_FILE_SYSTEM_TYPE := ext4
-ifneq ($(WITH_GMS),true)
-BOARD_PRODUCTIMAGE_EXTFS_INODE_COUNT := -1
-BOARD_PRODUCTIMAGE_PARTITION_RESERVED_SIZE := 1258291200
-BOARD_SYSTEMIMAGE_EXTFS_INODE_COUNT := -1
-BOARD_SYSTEMIMAGE_PARTITION_RESERVED_SIZE := 1258291200
-BOARD_SYSTEM_EXTIMAGE_EXTFS_INODE_COUNT := -1
-BOARD_SYSTEM_EXTIMAGE_PARTITION_RESERVED_SIZE := 1258291200
-else
 # Slightly overprovision dynamic partitions with 50MiB to
 # allow on-device file editing
 BOARD_SYSTEM_EXTIMAGE_PARTITION_RESERVED_SIZE := 52428800
 BOARD_SYSTEMIMAGE_PARTITION_RESERVED_SIZE := 52428800
 BOARD_VENDORIMAGE_PARTITION_RESERVED_SIZE := 52428800
 BOARD_PRODUCTIMAGE_PARTITION_RESERVED_SIZE := 52428800
-endif
-# TODO: fill from here
 
 BOARD_MOT_DP_GROUP_PARTITION_LIST := product system system_ext vendor
 BOARD_MOT_DP_GROUP_SIZE := 6169821184

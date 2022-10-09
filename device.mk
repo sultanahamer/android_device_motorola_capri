@@ -145,12 +145,12 @@ PRODUCT_PACKAGES += \
     android.hardware.bluetooth.audio@2.0-impl \
     audio.a2dp.default \
     audio.bluetooth.default \
-    audio.primary.bengal \ # this was audio.primary.kona before
+    audio.primary.bengal \
     audio.r_submix.default \
     audio.usb.default \
     libaudio-resampler \
     tinymix \
-    sound_trigger.primary.bengal # sound_trigger.primary.kona
+    sound_trigger.primary.bengal
 
 # TODO Later: Electimon is guessing these would come from lineageos
 # These are not all present in stock rom
@@ -169,23 +169,24 @@ PRODUCT_PACKAGES += \
 
 
 # TODO Later: Couldn't find the commented ones
+    # Found below from https://github.com/StormBreakerOSS/platform_hardware_qcom-caf_sm8250_audio
+    # Found sound_trigger ones in above url
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/audio/audio_effects.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_effects.xml \
     $(LOCAL_PATH)/audio/audio_ext_spkr.conf:$(TARGET_COPY_OUT_VENDOR)/etc/audio_ext_spkr.conf \
     $(LOCAL_PATH)/audio/audio_platform_info.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_platform_info.xml \
     $(LOCAL_PATH)/audio/audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio/audio_policy_configuration.xml \
     $(LOCAL_PATH)/audio/mixer_paths.xml:$(TARGET_COPY_OUT_VENDOR)/etc/mixer_paths.xml \
-    # Found below from https://github.com/StormBreakerOSS/platform_hardware_qcom-caf_sm8250_audio
     $(LOCAL_PATH)/audio/sound_trigger_mixer_paths.xml:$(TARGET_COPY_OUT_VENDOR)/etc/sound_trigger_mixer_paths.xml \
     $(LOCAL_PATH)/audio/sound_trigger_platform_info.xml:$(TARGET_COPY_OUT_VENDOR)/etc/sound_trigger_platform_info.xml
     # Couldn't find below in stock
     # $(LOCAL_PATH)/audio/audio_policy_configuration_a2dp_offload_disabled.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio/audio_policy_configuration_a2dp_offload_disabled.xml \
     # $(LOCAL_PATH)/audio/audio_policy_configuration_gsi_a2dp_offload_disabled.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_configuration_a2dp_offload_disabled.xml \
 
-PRODUCT_COPY_FILES += \
 # TODO: For now adding these into device tree but later get these into official lineage 4250, last two aren't present in stock
 # TODO test later: In case bt audio not working, may be remove the below
 # uncommented the below files, lets see how it goes as Electimon was alright with using sm8250 board stuff
+PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/audio/audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_configuration.xml \
     hardware/qcom-caf/sm8250/audio/configs/common/bluetooth_qti_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/bluetooth_qti_audio_policy_configuration.xml \
     hardware/qcom-caf/sm8250/audio/configs/common/bluetooth_qti_hearing_aid_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/bluetooth_qti_hearing_aid_audio_policy_configuration.xml

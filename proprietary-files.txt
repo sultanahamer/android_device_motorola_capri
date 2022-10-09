@@ -1237,8 +1237,6 @@ vendor/firmware/scuba_ipa_fws.b03
 vendor/firmware/scuba_ipa_fws.b04
 vendor/firmware/scuba_ipa_fws.elf
 vendor/firmware/scuba_ipa_fws.mdt
-vendor/firmware/wlan/qca_cld/WCNSS_qcom_cfg.ini
-vendor/firmware/wlan/qca_cld/wlan_mac.bin
 
 # Kernel modules alias temp
 # TODO: get rid of this and mention in tree

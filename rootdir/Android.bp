@@ -168,20 +168,8 @@ sh_binary {
 }
 
 sh_binary {
-    name: "init.qcom.sensors.sh",
-    src: "bin/init.qcom.sensors.sh",
-    vendor: true,
-}
-
-sh_binary {
     name: "init.qcom.sh",
     src: "bin/init.qcom.sh",
-    vendor: true,
-}
-
-sh_binary {
-    name: "init.qcom.usb.sh",
-    src: "bin/init.qcom.usb.sh",
     vendor: true,
 }
 
@@ -194,12 +182,6 @@ sh_binary {
 sh_binary {
     name: "init.qti.dcvs.sh",
     src: "bin/init.qti.dcvs.sh",
-    vendor: true,
-}
-
-sh_binary {
-    name: "init.qti.media.sh",
-    src: "bin/init.qti.media.sh",
     vendor: true,
 }
 
@@ -302,13 +284,6 @@ prebuilt_etc {
 prebuilt_etc {
     name: "init.qcom.rc",
     src: "etc/init.qcom.rc",
-    sub_dir: "init/hw",
-    vendor: true,
-}
-
-prebuilt_etc {
-    name: "init.qcom.usb.rc",
-    src: "etc/init.qcom.usb.rc",
     sub_dir: "init/hw",
     vendor: true,
 }
